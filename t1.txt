@@ -20,3 +20,26 @@ COPY --from=build /app/target/AI-OLMS.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
+Create Dockerfile
+       ↓
+Save Dockerfile
+       ↓
+Open Eclipse Terminal
+       ↓
+Go to project root
+       ↓
+docker build -t ai-olms:latest .
+       ↓
+docker images
+       ↓
+docker run -d --name ai-olms-container -p 8080:8080 ai-olms:latest
+       ↓
+docker ps
+       ↓
+docker logs ai-olms-container
+       ↓
+Open http://localhost:8080
+       ↓
+docker stop ai-olms-container
+       ↓
+docker rm ai-olms-container
