@@ -1,0 +1,104 @@
+| No. | Command                           | When should I use it?                                                                                       | Syntax / Example                          |
+| --: | --------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+|   1 | **`git clone`**                   | When you want to download an existing repository from GitHub to your computer.                              | `git clone <repository-url>`              |
+|   2 | **`cd`**                          | When you want to enter the project folder in the terminal.                                                  | `cd AI-OLMS`                              |
+|   3 | **`git init`**                    | When you have a local project that is **not yet a Git repository**.                                         | `git init`                                |
+|   4 | **`git status`**                  | When you want to check modified, staged, deleted, or untracked files.                                       | `git status`                              |
+|   5 | **`git remote -v`**               | When you want to check which remote/GitHub repository is connected.                                         | `git remote -v`                           |
+|   6 | **`git remote add origin`**       | When you want to connect your local Git repository to a GitHub repository.                                  | `git remote add origin <URL>`             |
+|   7 | **`git branch`**                  | When you want to see your local branches and current branch.                                                | `git branch`                              |
+|   8 | **`git branch -a`**               | When you want to see local **and remote** branches.                                                         | `git branch -a`                           |
+|   9 | **`git checkout -b`**             | When you want to **create a new branch and switch to it**.                                                  | `git checkout -b <branch-name>`           |
+|  10 | **`git checkout`**                | When you want to switch to an existing branch.                                                              | `git checkout main`                       |
+|  11 | **`git switch -c`**               | Modern alternative to create and switch to a branch.                                                        | `git switch -c <branch-name>`             |
+|  12 | **`git add <file>`**              | When you want to stage one particular file for commit.                                                      | `git add Payment.java`                    |
+|  13 | **`git add .`**                   | When you want to stage all changes in the current project/directory.                                        | `git add .`                               |
+|  14 | **`git commit`**                  | When you want to save staged changes into Git history.                                                      | `git commit -m "Add payment module"`      |
+|  15 | **`git commit --amend`**          | When the **latest commit** needs correction, especially a wrong commit message, and it has not been pushed. | `git commit --amend -m "Correct message"` |
+|  16 | **`git log`**                     | When you want to see complete commit history.                                                               | `git log`                                 |
+|  17 | **`git log --oneline`**           | When you want a short/compact commit history.                                                               | `git log --oneline`                       |
+|  18 | **`git log -1`**                  | When you want to see only the latest commit.                                                                | `git log -1`                              |
+|  19 | **`git show`**                    | When you want detailed information about a particular/latest commit.                                        | `git show HEAD`                           |
+|  20 | **`git diff`**                    | When you want to see changes that are **not yet staged**.                                                   | `git diff`                                |
+|  21 | **`git diff <file>`**             | When you want to see unstaged changes in one file.                                                          | `git diff Student.java`                   |
+|  22 | **`git diff --cached`**           | When you want to see changes that are already **staged**.                                                   | `git diff --cached`                       |
+|  23 | **`git restore <file>`**          | When you accidentally modify/delete a file and want to restore the committed version.                       | `git restore course.jsp`                  |
+|  24 | **`git restore --staged <file>`** | When a file is staged accidentally and you want to **unstage it without deleting your changes**.            | `git restore --staged file.java`          |
+|  25 | **`git merge`**                   | When you want to combine changes from one branch into another.                                              | `git merge feature/payment`               |
+|  26 | **`git merge --abort`**           | When a merge has conflicts and you want to cancel the merge.                                                | `git merge --abort`                       |
+|  27 | **`git push`**                    | When you want to upload your local commits to GitHub.                                                       | `git push`                                |
+|  28 | **`git push -u origin`**          | When pushing a new branch for the first time and setting its upstream branch.                               | `git push -u origin feature/payment`      |
+|  29 | **`git pull`**                    | When you want to get the latest changes from GitHub and integrate them into your current branch.            | `git pull`                                |
+|  30 | **`git fetch`**                   | When you want to download remote updates **without merging them yet**.                                      | `git fetch origin`                        |
+|  31 | **`git revert`**                  | When you need to safely undo a commit that has already been pushed/shared.                                  | `git revert HEAD`                         |
+|  32 | **`git stash`**                   | When you have unfinished/uncommitted work and temporarily need a clean working directory.                   | `git stash`                               |
+|  33 | **`git stash list`**              | When you want to see your saved stashes.                                                                    | `git stash list`                          |
+|  34 | **`git stash pop`**               | When you want to restore the most recent stashed changes.                                                   | `git stash pop`                           |
+|  35 | **`git diff > file.patch`**       | When you want to create a patch from **uncommitted changes**.                                               | `git diff > changes.patch`                |
+|  36 | **`git apply`**                   | When you receive a patch and want to apply its changes.                                                     | `git apply changes.patch`                 |
+|  37 | **`git format-patch`**            | When you want to create a patch from a **commit**.                                                          | `git format-patch -1 HEAD`                |
+|  38 | **`git am`**                      | When you want to apply a patch created using `git format-patch`.                                            | `git am 0001-feature.patch`               |
+|  39 | **`git rebase`**                  | When you want to update your feature branch with the latest main branch using rebase.                       | `git rebase main`                         |
+|  40 | **`git rebase --continue`**       | After resolving a rebase conflict, to continue the rebase.                                                  | `git rebase --continue`                   |
+|  41 | **`git rebase --abort`**          | When you want to cancel a rebase in progress.                                                               | `git rebase --abort`                      |
+|  42 | **`git push --force-with-lease`** | When a rebase changed the history of an already-pushed branch and a normal push is rejected.                | `git push --force-with-lease`             |
+|  43 | **`git branch -m`**               | When you want to rename a branch.                                                                           | `git branch -m old-name new-name`         |
+|  44 | **`git tag`**                     | When you want to create a version/release tag.                                                              | `git tag v1.0`                            |
+|  45 | **`git push origin <tag>`**       | When you want to push a tag to GitHub.                                                                      | `git push origin v1.0`                    |
+|  46 | **`git rm --cached`**             | When you want Git to stop tracking a file but **keep the file on your computer**.                           | `git rm --cached .env`                    |
+|  47 | **`.gitignore`**                  | When you want Git to ignore files/folders such as `target/`, `.env`, `.settings/`, etc.                     | Create `.gitignore` and add `target/`     |
+|  48 | **`ssh -T`**                      | When you want to test your GitHub SSH authentication.                                                       | `ssh -T git@github.com`                   |
+GET PROJECT
+   ↓
+git clone
+   ↓
+CHECK
+   ↓
+git status
+   ↓
+CREATE BRANCH
+   ↓
+git checkout -b
+   ↓
+EDIT
+   ↓
+git add
+   ↓
+git commit
+   ↓
+git push
+smtg goes wrong
+Wrong latest message, NOT pushed
+        ↓
+git commit --amend
+
+
+Deleted file
+        ↓
+git restore
+
+
+Accidentally staged
+        ↓
+git restore --staged
+
+
+Pushed bad commit
+        ↓
+git revert
+
+
+Need temporary storage
+        ↓
+git stash
+
+
+Need combine branches
+        ↓
+git merge
+
+
+Need latest main using rebase
+        ↓
+git rebase main
+
