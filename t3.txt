@@ -1,1 +1,107 @@
 this is t3
+1. Installation and configuration
+Command	Use
+git --version	Check Git version
+git config --global user.name "Name"	Set username
+git config --global user.email "email"	Set email
+git config --list	View Git configuration
+
+2. Repository commands
+Command	Use
+git init	Create a new local repository
+git clone URL	Download an existing repository
+git status	Check file changes
+git status --short	Short status
+git ls-files	List tracked files
+git remote -v	Display remote repository URLs
+git remote add origin URL	Connect GitHub repository
+git remote remove origin	Remove remote connection
+git remote set-url origin URL	Change remote URL
+
+3. Add, commit and push
+Command	Use
+git add filename	Stage a particular file
+git add .	Stage all changes in current directory
+git add -A	Stage all repository changes
+git commit -m "message"	Save staged changes
+git push	Upload commits to remote
+git push origin main	Push main branch
+git push -u origin main	Push and set upstream branch
+
+4. Download changes
+Command	Use
+git fetch	Download changes without merging
+git fetch origin	Fetch from origin
+git pull	Download and integrate changes
+git pull origin main	Pull main branch
+
+5. Branch commands
+Command	Use
+git branch	List local branches
+git branch -a	List all branches
+git branch feature	Create branch
+git switch feature	Switch branch
+git switch -c feature	Create and switch branch
+git branch -d feature	Delete merged branch
+git branch -D feature	Force-delete branch
+git branch -m newname	Rename current branch
+git push -u origin feature	Push new branch
+git push origin --delete feature	Delete remote branch
+
+6. Merge commands
+Command	Use
+git merge feature	Merge feature into current branch
+git merge --abort	Cancel merge
+git log --oneline --graph --all	Display branch and merge history
+
+7. Undo and restore commands
+Command	Use
+git restore filename	Discard unstaged file changes
+git restore .	Discard all unstaged tracked-file changes
+git restore --staged filename	Unstage a file
+git reset --soft HEAD~1	Undo latest commit, keep changes staged
+git reset --mixed HEAD~1	Undo latest commit, keep changes unstaged
+git reset --hard HEAD~1	Undo latest commit and discard changes
+git revert COMMIT_ID	Reverse a commit safely using a new commit
+git commit --amend -m "message"	Modify latest commit
+
+8. Stash commands
+Command	Use
+git stash	Temporarily save changes
+git stash -u	Save changes including untracked files
+git stash list	List saved stashes
+git stash apply	Restore latest stash
+git stash pop	Restore and remove latest stash
+git stash drop	Delete latest stash
+
+9. File commands
+Command	Use
+git rm filename	Delete file and stage deletion
+git rm --cached filename	Stop tracking file but keep it locally
+git mv old new	Rename or move tracked file
+git check-ignore -v filename	Check why a file is ignored
+
+10. History and comparison
+Command	Use
+git log	Display commit history
+git log --oneline	Compact commit history
+git show	Display latest commit details
+git diff	Show unstaged changes
+git diff --staged	Show staged changes
+git reflog	Show recent HEAD movements
+
+11. Tags
+Command	Use
+git tag	List tags
+git tag v1.0	Create tag
+git tag -a v1.0 -m "Version 1"	Create annotated tag
+git push origin v1.0	Push a particular tag
+git push origin --tags	Push all tags
+
+12. Advanced commands
+Command	Use
+git rebase main	Reapply current branch commits on main
+git rebase --abort	Cancel rebase
+git rebase --continue	Continue rebase
+git cherry-pick COMMIT_ID	Apply a particular commit
+git push --force-with-lease
