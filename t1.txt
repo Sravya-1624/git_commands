@@ -1,45 +1,117 @@
 This is file t1
-# Stage 1: Build the WAR
-FROM maven:3.9-eclipse-temurin-17 AS build
 
-WORKDIR /app
-
-COPY pom.xml .
-COPY src ./src
-
-RUN mvn clean package -DskipTests
-
-
-# Stage 2: Run the WAR using Tomcat
-FROM tomcat:9-jdk17
-
-RUN rm -rf /usr/local/tomcat/webapps/*
-
-COPY --from=build /app/target/AI-OLMS.war /usr/local/tomcat/webapps/ROOT.war
-
-EXPOSE 8080
-
-CMD ["catalina.sh", "run"]
-Create Dockerfile
-       ↓
-Save Dockerfile
-       ↓
-Open Eclipse Terminal
-       ↓
-Go to project root
-       ↓
-docker build -t ai-olms:latest .
-       ↓
-docker images
-       ↓
-docker run -d --name ai-olms-container -p 8080:8080 ai-olms:latest
-       ↓
-docker ps
-       ↓
-docker logs ai-olms-container
-       ↓
-Open http://localhost:8080
-       ↓
-docker stop ai-olms-container
-       ↓
-docker rm ai-olms-container
+Windows setup and starting Kubernetes
+Before the practical: start Docker Desktop and wait until its engine is running. Open PowerShell.
+minikube version
+kubectl version --client
+docker version
+minikube start --driver=docker
+kubectl cluster-info
+kubectl get nodes
+If Minikube is not installed, install Minikube and kubectl before the exam or use the lab-provided environment. The
+commands below assume a working Minikube cluster.
+Create, inspect, scale and expose an application
+kubectl create deployment demo-app --image=nginx
+Question 3 & 4 — Complete Practical Exam Guide Page 3
+kubectl get deployments
+kubectl get pods
+kubectl get pods -o wide
+kubectl describe deployment demo-app
+kubectl scale deployment demo-app --replicas=3
+kubectl get pods
+kubectl expose deployment demo-app --type=NodePort --port=80
+kubectl get services
+minikube service demo-app
+Replace demo-app with the deployment name in the question. Replace 3 with the required replica count. The container
+listens on port 80 in this Nginx example.
+Useful ways to access the app
+minikube service demo-app
+kubectl port-forward service/demo-app 8081:80
+The first command opens the Service through Minikube. The second forwards your computer's port 8081 to Service port
+80. Keep the port-forward terminal open while testing.
+Self-healing demonstration
+kubectl get pods
+kubectl delete pod POD_NAME
+kubectl get pods -w
+Delete one Pod from the Deployment and watch Kubernetes create a replacement. Use the exact Pod name shown by
+kubectl get pods. Explain that the Deployment's desired replica count is maintained by its ReplicaSet.
+Rolling update and rollback
+kubectl set image deployment/demo-app nginx=nginx:1.25
+kubectl rollout status deployment/demo-app
+kubectl rollout history deployment/demo-app
+kubectl rollout undo deployment/demo-app
+kubectl get pods
+The container name in the image-update command must match the container name inside the Deployment. For an Nginx
+deployment created by kubectl, it is normally nginx.
+Kubernetes troubleshooting
+kubectl get pods
+kubectl describe pod POD_NAME
+kubectl logs POD_NAME
+kubectl logs POD_NAME --previous
+kubectl get events --sort-by=.metadata.creationTimestamp
+kubectl get deployments
+kubectl get services
+• Pending: Pod could not be scheduled; inspect Events, resource requests and node availability.
+• ImagePullBackOff: Check image name, tag, registry access and spelling.
+• CrashLoopBackOff: Container repeatedly exits; inspect logs and configuration.
+• Service not reachable: Check Service selector, Pod labels, targetPort, Pod readiness and NodePort access.
+• Wrong replica count: Check Deployment and run kubectl scale again.
+Cleanup
+kubectl delete service demo-app
+kubectl delete deployment demo-app
+minikube stop
+Part B: Nagios fundamentals
+What is Nagios? Nagios is an IT infrastructure monitoring tool. It checks hosts and services and reports states such as
+OK, WARNING, CRITICAL and UNKNOWN. It can notify administrators when configured checks detect problems.
+Host vs service: A host is the machine/device being monitored. A service is a particular check on that host, such as
+HTTP, SSH, disk usage or a database port.
+Question 3 & 4 — Complete Practical Exam Guide Page 6
+Example Compose file: web + PostgreSQL + Redis
+services:
+web:
+build: .
+container_name: apartment-web
+ports:
+- "8085:80"
+depends_on:
+- db
+- redis
+networks:
+- app-net
+db:
+image: postgres:15
+container_name: apartment-db
+environment:
+POSTGRES_DB: apartmentdb
+POSTGRES_USER: apartmentuser
+POSTGRES_PASSWORD: ChangeThisPassword
+volumes:
+- postgres-data:/var/lib/postgresql/data
+networks:
+- app-net
+redis:
+image: redis:7
+container_name: apartment-redis
+networks:
+- app-net
+networks:
+app-net:
+driver: bridge
+volumes:
+postgres-data:
+This is a teaching template. The web service above must be a real backend configured to connect to PostgreSQL at host
+db, port 5432, and Redis at host redis, port 6379. A static Nginx page alone does not use either database service. Change
+sample passwords before real use.
+Compose commands
+docker compose config
+docker compose pull
+docker compose up -d --build
+docker compose ps
+docker compose logs
+docker compose logs -f
+docker compose logs db
+docker compose restart
+docker compose restart web
+docker compose up -d --build web
+docker compose down
+docker compose down -
